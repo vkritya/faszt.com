@@ -1,0 +1,15 @@
+{
+  "name": "faszt-com-frontend",
+  "version": "0.1.0",
+  "author": "Pampár <pampar@pampar.net> (https://pampar.net)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.11",
+    "vite-plugin-php": "^1.0.68",
+    "vue": "^3.5.13"
+  }
+}
