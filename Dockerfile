@@ -5,7 +5,8 @@ WORKDIR /home/node/app
 USER node
 
 COPY --chown=node:node ./app .
-RUN npm install && npm run build
+RUN npm install
+RUN npm run build
 
 
 FROM ghcr.io/librespeed/speedtest:latest-alpine AS app
