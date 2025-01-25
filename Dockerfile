@@ -11,9 +11,9 @@ RUN npm install && npm run build
 FROM ghcr.io/librespeed/speedtest:latest-alpine AS app
 
 COPY ./app/entrypoint.sh /
-COPY --from=build /home/node/dist/* /speedtest/
-
+COPY --from=build /home/node/app/dist /speedtest/
+RUN ls /speedtest/
 RUN mv /speedtest/index.php /speedtest/ui.php
 
-ENV DISABLE_IPINFO true
-ENV TITLE Faszt.com
+ENV DISABLE_IPINFO=true
+ENV TITLE=Faszt.com
