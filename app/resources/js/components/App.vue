@@ -5,8 +5,7 @@
         <!-- Message if appState = 'error' -->
         <ServerSelector v-if="appMode == 'frontend'" v-model="serverId" :servers="viableServers" :disabled="appState == 'testing'"/>
         <button @click="startStop()">{{ appState == 'ready' ? "Start test" : "Stop test" }}</button>
-        <Metrics />
-        {{ speedtestData }}
+        <Metrics :data="speedtestData"/>
     </template>
 </template>
 <script setup>

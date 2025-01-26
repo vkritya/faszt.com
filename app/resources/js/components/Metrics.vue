@@ -1,15 +1,15 @@
 <template>
-    <Indickator />
+    <Indickator :speed="indicatedSpeed" />
     <!--  Indickator   |       DOWNLOAD    |    UPLOAD      -->
     <!--  Indickator   |   IPAddress  |   Ping   |  Jitter  -->
 </template>
 
 <script setup>
+import { computed, defineProps } from 'vue';
 import Indickator from './metrics/Indickator.vue';
 
-function mbpsToAmount(s) {
-    return 1 - (1 / (Math.pow(1.3, Math.sqrt(s))));
-}
+const props = defineProps(["data"])
+
 function format(d) {
     d = Number(d);
     if (d < 10) return d.toFixed(2);
@@ -17,10 +17,18 @@ function format(d) {
     return d.toFixed(0);
 }
 
-function oscillate() {
-    return 1 + 0.02 * Math.sin(Date.now() / 100);
-}
 
+
+const indicatedSpeed = computed(() => {
+    switch (props.data?.testState) {
+        case 1:
+            return props.data.dlStatus
+        case 3:
+            return props.data.ulStatus
+        default:
+            return 0
+    }
+})
 </script>
 
 <style scoped></style>
