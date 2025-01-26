@@ -51,7 +51,9 @@ const driverLoop = (currentTime) => {
             signal += Kd * (error - lastError) / timeDelta
             // Plant is mass with damping
             plantSpeed = (1 - damping) * (plantSpeed + signal * timeDelta / inertia)
-            current = current + plantSpeed * timeDelta
+            current += plantSpeed * timeDelta
+            // Add a bit of scaled noise to the animation
+            current *= 1 + 0.005 * (Math.random()-0.5)
             // Set svg progress, 0-1 should map to 0.15-0.85 to allow for overshoots
             morph.seek((current * (0.85 - 0.15) + 0.15) * morph.duration)
 
