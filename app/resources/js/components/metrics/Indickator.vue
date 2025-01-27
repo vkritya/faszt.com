@@ -1,8 +1,13 @@
 <template>
     <div>
-        <svg width="40%" viewBox="0 0 234.378 206.6457">
-            <ellipse cx="46.5354" cy="156.3307" rx="46.5354" ry="50.315" />
-            <path ref="indickator" class="st0" d="M43.2366,127.3113c54.384,0.0889,108.1335,6.0245,150.0863,40.8777" />
+        <svg class="overflow-visible" viewBox="0 0 234.378 206.6457">
+            <path class="stroke-indickator fill-none transition-colors duration-500 st0" :class="color" ref="indickator"
+                d="M43.2366,127.3113c54.384,0.0889,108.1335,6.0245,150.0863,40.8777" />
+            <ellipse class="fill-indickator stroke-0 transition-colors duration-500" :class="color" cx="46.5354"
+                cy="156.3307" rx="46.5354" ry="50.315" />
+            <path
+                class="opacity-20"
+                d="M86.7,131c2.8,6.6,4.4,13.9,4.4,21.6c0,28.7-21.5,51.9-48,51.9c-7.1,0-13.9-1.7-20-4.7c6.9,4.3,14.9,6.9,23.4,6.9c25.7,0,46.5-22.5,46.5-50.3C93.1,147.1,90.8,138.4,86.7,131z" />
         </svg>
     </div>
 </template>
@@ -14,7 +19,7 @@ import { useTemplateRef, onMounted, ref, watch, computed, defineProps } from 'vu
 const indickator = useTemplateRef('indickator')
 var morph = null
 
-const props = defineProps(["speed"])
+const props = defineProps(["speed", "color"])
 
 // Define setpoint and current value
 const setpoint = computed(() => {
@@ -36,13 +41,15 @@ let lastTime = null;
 let lastError = 0;
 let errorSum = 0;
 let plantSpeed = 0;
+
 const driverLoop = (currentTime) => {
     if (lastTime != null) {
         let timeDelta = (currentTime - lastTime) / 1000;  // div to convert to seconds
         // If timeDelta is too high, don't do physics this frame
         // Probably too high because page was sent to background and regained focus later
         // requestAnimationFrame pauses while page is in background
-        if (timeDelta < 0.2) {
+        // Also don't do physics if anything is NaN
+        if (timeDelta < 0.2 && !isNaN(setpoint.value) && !isNaN(timeDelta) && timeDelta !== 0) {
             // Calculate error
             let error = setpoint.value - current
             // PID
@@ -53,7 +60,7 @@ const driverLoop = (currentTime) => {
             plantSpeed = (1 - damping) * (plantSpeed + signal * timeDelta / inertia)
             current += plantSpeed * timeDelta
             // Add a bit of scaled noise to the animation
-            current *= 1 + 0.005 * (Math.random()-0.5)
+            current *= 1 + 0.005 * (Math.random() - 0.5)
             // Set svg progress, 0-1 should map to 0.15-0.85 to allow for overshoots
             morph.seek((current * (0.85 - 0.15) + 0.15) * morph.duration)
 
@@ -91,15 +98,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
-svg {
-    overflow: visible;
-}
-
 .st0 {
-    fill: none;
-    stroke: #000000;
     stroke-width: 42.5197;
     stroke-linecap: round;
-    stroke-miterlimit: 10;
 }
 </style>

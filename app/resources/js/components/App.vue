@@ -1,12 +1,16 @@
 <template>
-    <Message v-if="appState == 'error'" />
-    <Spinner v-else-if="appState == 'init'" />
-    <template v-else>
-        <!-- Message if appState = 'error' -->
-        <ServerSelector v-if="appMode == 'frontend'" v-model="serverId" :servers="viableServers" :disabled="appState == 'testing'"/>
-        <button @click="startStop()">{{ appState == 'ready' ? "Start test" : "Stop test" }}</button>
-        <Metrics :data="speedtestData"/>
-    </template>
+    <h1 class="md:mt-6 mt-3 w-full text-center text-3xl md:text-5xl font-bold italic">{{ title }}</h1>
+    <div class="container mx-auto md:pt-8 pt-2 flex flex-col md:items-center items-end">
+        <Message v-if="appState == 'error'" />
+        <Spinner v-else-if="appState == 'init'" />
+        <template v-else>
+            <Metrics :data="speedtestData">
+                <ServerSelector v-if="appMode == 'frontend'" v-model="serverId" :servers="viableServers" :disabled="appState == 'testing'"/>
+                <button class="md:hidden btn btn-lg mb-4" :class="appState == 'ready' ? 'btn-success' : 'btn-error'" @click="startStop()">{{ appState == 'ready' ? "Begin test" : "Cancel test" }}</button>
+            </Metrics>
+            <button class="md:block hidden btn btn-lg mt-4" :class="appState == 'ready' ? 'btn-success' : 'btn-error'" @click="startStop()">{{ appState == 'ready' ? "Begin test" : "Cancel test" }}</button>
+        </template>
+    </div>
 </template>
 <script setup>
 import Metrics from './Metrics.vue'
@@ -14,6 +18,8 @@ import ServerSelector from './ServerSelector.vue';
 import Message from './Message.vue';
 import Spinner from './Spinner.vue';
 import { ref, watch } from 'vue'
+
+const title = ref(TITLE)
 
 // Determine mode
 const appMode = ref('');

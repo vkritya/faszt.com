@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="min-h-svh">
 
 <head>
 	<link rel="shortcut icon" href="favicon.ico">
@@ -22,8 +22,8 @@
 	<title><?= getenv('TITLE') ?: 'LibreSpeed' ?></title>
 </head>
 
-<body>
-	<div id="app"></div>
+<body class="min-h-full">
+	<div id="app" class="min-h-full grid grid-rows-[min-content_1fr] py-4"></div>
 </body>
 
 </html>

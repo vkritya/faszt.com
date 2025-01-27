@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+    --color-indickator: oklch(0.91 0.09 73.95);
+}
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    --color-indickator: oklch(0.91 0.09 73.95);
+    --color-primary: oklch(0.71 0.14 194.06);
+    --color-secondary: oklch(0.64 0.23 353.85);
+}
+
+@plugin "daisyui/theme" {
+    name: "dark";
+    prefersdark: true;
+    --color-indickator: oklch(0.34 0.08 57.32);
+    --color-primary: oklch(0.88 0.17 194.23);
+    --color-secondary: oklch(0.7 0.29 334.78);
+}
