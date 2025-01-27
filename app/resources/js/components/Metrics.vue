@@ -60,7 +60,11 @@ function format(d) {
         return `${d.toFixed(1)} Mbps`;
     if (d < 1000)
         return `${d.toFixed(0)} Mbps`;
-    return `${(d / 1000).toFixed(2)} Gbps`;
+    if (d < 10000)
+        return `${(d / 1000).toFixed(2)} Gbps`;
+    if (d < 100000)
+        return `${(d / 1000).toFixed(1)} Gbps`;
+    return `${(d / 1000).toFixed(0)} Gbps`;
 }
 
 const dlValues = ref([])
