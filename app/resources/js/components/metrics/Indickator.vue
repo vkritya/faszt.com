@@ -1,6 +1,6 @@
 <template>
     <div>
-        <svg class="overflow-visible" viewBox="0 0 234.378 206.6457">
+        <svg class="overflow-visible transition-transform" viewBox="0 0 234.378 206.6457" style="transform-origin: center bottom; transform: scale(var(--indickator-size));">
             <path class="stroke-indickator fill-none transition-colors duration-500 st0" :class="color" ref="indickator"
                 d="M43.2366,127.3113c54.384,0.0889,108.1335,6.0245,150.0863,40.8777" />
             <ellipse class="fill-indickator stroke-0 transition-colors duration-500" :class="color" cx="46.5354"
