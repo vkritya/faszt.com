@@ -1,25 +1,9 @@
 services:
-  faszt-com:
-    image: ktkszsz/faszt-com:latest
-    container_name: ${USER}-faszt-com
+  dev-container:
+    image: local/faszt-com:latest
+    container_name: faszt-com
     build:
       context: .
       target: app
-    labels:
-      - "traefik.enable=true"
-      - "traefik.services.${USER}-faszt-com.loadbalancer.server.port=8080"
-
-  faszt-com-original:
-    image: ghcr.io/librespeed/speedtest:latest-alpine
-    container_name: ${USER}-faszt-com-original
-    environment:
-      - DISABLE_IPINFO=true
-      - TITLE=Faszt.com
-    labels:
-      - "traefik.enable=true"
-      - "traefik.services.${USER}-faszt-com-original.loadbalancer.server.port=8080"
-
-networks:
-  default:
-    external: true
-    name: traefik
+    ports:
+      - 8080:8080
