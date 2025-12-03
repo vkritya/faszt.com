@@ -11,6 +11,9 @@
             <button class="md:block hidden btn btn-lg mt-4" :class="appState == 'ready' ? 'btn-success' : 'btn-error'" @click="startStop()">{{ appState == 'ready' ? "Begin test" : "Cancel test" }}</button>
         </template>
     </div>
+  <div class="mt-5 flex justify-center">
+    <a class="link link-accent" href="https://github.com/vkritya/faszt.com">Source on Github</a>
+  </div>
 </template>
 <script setup>
 import Metrics from './Metrics.vue'
