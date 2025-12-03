@@ -1,3 +1,5 @@
+ARG VERSION=latest-alpine
+
 FROM node:lts-alpine AS build
 RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
 WORKDIR /home/node/app
@@ -9,7 +11,7 @@ RUN npm install
 RUN npm run build
 
 
-FROM ghcr.io/librespeed/speedtest:latest-alpine AS app
+FROM ghcr.io/librespeed/speedtest:$VERSION AS app
 
 COPY ./app/entrypoint.sh /
 COPY --from=build /home/node/app/dist /speedtest/
