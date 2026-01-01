@@ -2,3 +2,4 @@ include:
   - component: $CI_SERVER_FQDN/gitlab-pipelines/generic-dockerfile/generic@1
     inputs:
       master-tag: latest
+      build-args: "VERSION=5.5.0-alpine"
