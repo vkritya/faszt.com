@@ -18,10 +18,11 @@ There's a build arg, `VERSION`, if you want to build a specific version instead 
 - Test in different modes, not just standalone
 - Reimplement broken modes (they are probably broken)
 - Add backend server selection
+- Check compatibility with upstream 6.0 (new design system)
 
 
 ## Licensing
-Modifications - Copyright (C) 2025 Kristóf Veres \
+Modifications - Copyright (C) 2025-2026 Kristóf Veres \
 Original - Copyright (C) 2016-2024 Federico Dossena
 
 This program is free software: you can redistribute it and/or modify

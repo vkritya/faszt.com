@@ -1,4 +1,4 @@
-ARG VERSION=latest-alpine
+ARG VERSION=5.5.0-alpine
 
 FROM node:lts-alpine AS build
 RUN mkdir -p /home/node/app && chown -R node:node /home/node/app
