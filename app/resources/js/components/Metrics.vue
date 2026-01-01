@@ -26,11 +26,6 @@
                 </div>
             </div>
             <div class="stats bg-base-200 shadow grid-cols-2 w-full">
-                <div v-if="data?.clientIp" class="stat place-items-center">
-                    <div class="stat-title">Ping</div>
-                    <div class="stat-value">{{ data?.clientIp ?
-                        `${data.clientIp.split(' ')[0]} ms` : '-' }}</div>
-                </div>
                 <div class="stat place-items-center">
                     <div class="stat-title">Ping</div>
                     <div class="stat-value">{{ data?.pingStatus ?
